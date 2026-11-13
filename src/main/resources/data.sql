@@ -1,0 +1,3 @@
+insert into app_user (id, user_name, first_name, last_name, email, ssn) values (101, 'trololo', 'Trolo', 'Molo', 'trolomolo@seznam.cz', 'ssn789453');
+insert into app_user (id, user_name, first_name, last_name, email, ssn) values (102, 'trolola', 'Trola', 'Mola', 'trolamola@seznam.cz', 'ssn516311');
+insert into app_user (id, user_name, first_name, last_name, email, ssn) values (103, 'trolole', 'Trole', 'Mole', 'trolemole@seznam.cz', 'ssn456834');
