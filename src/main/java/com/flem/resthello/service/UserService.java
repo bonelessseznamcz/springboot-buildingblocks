@@ -5,9 +5,9 @@ import com.flem.resthello.exception.UserExistsException;
 import com.flem.resthello.exception.UserNotFoundException;
 import com.flem.resthello.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 @Service
 public class UserService {

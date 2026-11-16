@@ -1,6 +1,8 @@
 package com.flem.resthello.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "app_user")
@@ -10,12 +12,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotEmpty(message = "Username is Mandatory. Please provide Username")
     @Column(name = "user_name", length = 50, nullable = false, unique = true)
     private String userName;
 
+    @Size(min = 4, message = "First name should have at least 2 characters")
     @Column(name = "first_name")
     private String firstName;
 
+    @Size(min = 2, message = "Surname should have at least 2 characters")
     @Column(name = "last_name")
     private String lastName;
 

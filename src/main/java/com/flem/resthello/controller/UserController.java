@@ -3,16 +3,21 @@ package com.flem.resthello.controller;
 import com.flem.resthello.entity.User;
 import com.flem.resthello.exception.UserExistsException;
 import com.flem.resthello.exception.UserNotFoundException;
+import com.flem.resthello.exception.UsernameNotFoundException;
 import com.flem.resthello.service.UserService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
+@Validated
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -29,7 +34,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user, UriComponentsBuilder builder) {
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user, UriComponentsBuilder builder) {
         try {
             var createdUser = service.createUser(user);
             HttpHeaders headers = new HttpHeaders();
@@ -41,7 +46,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
+    public User getUserById(@PathVariable @Min(1) Long id) {
         try {
             return service.getUserById(id);
         } catch (UserNotFoundException uex) {
@@ -71,7 +76,11 @@ public class UserController {
     }
 
     @GetMapping("/username/{userName}")
-    public User getUserById(@PathVariable String userName) {
-        return service.getUserByUserName(userName);
+    public User getUserById(@PathVariable String userName) throws UsernameNotFoundException {
+        var user = service.getUserByUserName(userName);
+        if (user == null) {
+            throw new UsernameNotFoundException("Username " + userName + " not found");
+        }
+        return user;
     }
 }
