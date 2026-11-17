@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 @Entity
 @Table(name = "app_user")
 public class User {
@@ -33,7 +35,14 @@ public class User {
     @Column(name = "ssn", length = 50, nullable = false, unique = true)
     private String ssn;
 
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
+
     public User() {}
+
+    public User(Long id) {
+        this.id = id;
+    }
 
     public User(String userName, String firstName, String lastName, String email, String role, String ssn) {
         this.userName = userName;
@@ -42,6 +51,14 @@ public class User {
         this.email = email;
         this.role = role;
         this.ssn = ssn;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     public Long getId() {
