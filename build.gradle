@@ -27,6 +27,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-hateoas'
     implementation 'tools.jackson.core:jackson-databind'
     implementation("org.mapstruct:mapstruct:1.6.3")
+    implementation("tools.jackson.dataformat:jackson-dataformat-xml")
     annotationProcessor("org.mapstruct:mapstruct-processor:1.6.3")
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.h2database:h2:2.5.252'

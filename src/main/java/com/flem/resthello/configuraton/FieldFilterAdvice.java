@@ -5,6 +5,7 @@ import org.jspecify.annotations.Nullable;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.xml.JacksonXmlHttpMessageConverter;
 import org.springframework.http.converter.json.JacksonJsonHttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
@@ -22,7 +23,8 @@ public class FieldFilterAdvice implements ResponseBodyAdvice<Object> {
 
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
-        return converterType == JacksonJsonHttpMessageConverter.class;
+        return converterType == JacksonJsonHttpMessageConverter.class
+                || converterType == JacksonXmlHttpMessageConverter.class;
     }
 
     @Override
