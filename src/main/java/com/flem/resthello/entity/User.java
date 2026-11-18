@@ -1,5 +1,8 @@
 package com.flem.resthello.entity;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -8,6 +11,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "app_user")
+@JsonFilter("userFilter")
+//@JsonIgnoreProperties({"email"}) - static filtering
 public class User {
 
     @Id
@@ -33,6 +38,7 @@ public class User {
     private String role;
 
     @Column(name = "ssn", length = 50, nullable = false, unique = true)
+//    @JsonIgnore
     private String ssn;
 
     @OneToMany(mappedBy = "user")
