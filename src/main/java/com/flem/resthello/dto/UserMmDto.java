@@ -1,11 +1,14 @@
 package com.flem.resthello.dto;
 
-import com.flem.resthello.entity.Order;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
 
 public class UserMmDto {
+    @Schema(example = "101", description = "Unique user identifier")
     private Long userId;
+
+    @Schema(example = "trolol", description = "Unique user login")
     private String login;
 
     public List<OrderDto> getOrders() {

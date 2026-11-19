@@ -5,6 +5,8 @@ import com.flem.resthello.exception.UserExistsException;
 import com.flem.resthello.exception.UserNotFoundException;
 import com.flem.resthello.exception.UsernameNotFoundException;
 import com.flem.resthello.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import org.springframework.http.HttpHeaders;
@@ -20,6 +22,7 @@ import java.util.List;
 @Validated
 @RestController
 @RequestMapping("/user")
+@Tag(name = "User Controller", description = "Basic user controller")
 public class UserController {
 
     private final UserService service;
@@ -28,6 +31,7 @@ public class UserController {
         this.service = service;
     }
 
+    @Operation(summary = "Get all users", description = "Returns all users")
     @GetMapping("/all")
     public List<User> getAllUsers() {
         return service.getAllUsers();
